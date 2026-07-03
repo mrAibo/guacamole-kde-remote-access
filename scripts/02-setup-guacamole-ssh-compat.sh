@@ -18,6 +18,7 @@ fi
 TS="$(date +%Y%m%d-%H%M%S)"
 cd "$BASE"
 set -a
+# shellcheck disable=SC1091
 source "$BASE/.env"
 set +a
 

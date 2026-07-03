@@ -137,6 +137,7 @@ set -euo pipefail
 BASE="/opt/guacamole"
 cd "$BASE"
 set -a
+# shellcheck disable=SC1091
 source "$BASE/.env"
 set +a
 mkdir -p "$BASE/backups"
@@ -157,7 +158,7 @@ echo "=== docker compose ps ==="
 docker compose ps
 
 echo "=== local HTTP check ==="
-for i in {1..30}; do
+for _ in {1..30}; do
   if curl -fsSI http://127.0.0.1:8080 >/dev/null; then
     curl -I http://127.0.0.1:8080 | head -5
     break

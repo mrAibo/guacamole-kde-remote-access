@@ -19,6 +19,7 @@ SSH_PORT="${GUAC_SSH_PORT:-2222}"
 
 cd "$BASE"
 set -a
+# shellcheck disable=SC1091
 source "$BASE/.env"
 set +a
 

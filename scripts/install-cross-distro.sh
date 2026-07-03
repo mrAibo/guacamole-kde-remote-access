@@ -50,7 +50,6 @@ source_os_release(){
     source /etc/os-release
   else
     ID=unknown
-    ID_LIKE=
   fi
 }
 
@@ -335,7 +334,12 @@ setup_krdp_if_available(){
     return 0
   fi
   log "Configuring optional KRdp on port $KRDP_PORT"
-  local dir="$APP_HOME/.config/guacamole-krdp" env="$dir/rdp.env" certdir="$dir/certs" svcdir="$APP_HOME/.config/systemd/user" usersvc="$svcdir/guacamole-krdp.service"
+  local dir env certdir svcdir usersvc
+  dir="$APP_HOME/.config/guacamole-krdp"
+  env="$dir/rdp.env"
+  certdir="$dir/certs"
+  svcdir="$APP_HOME/.config/systemd/user"
+  usersvc="$svcdir/guacamole-krdp.service"
   install -d -m 700 -o "$APP_USER" -g "$APP_GROUP" "$dir" "$certdir" "$svcdir"
   if [[ ! -f "$env" ]]; then
     cat > "$env" <<EOF
@@ -374,7 +378,10 @@ EOF
 
 psql_exec(){
   cd "$GUAC_BASE"
-  set -a; source "$GUAC_BASE/.env"; set +a
+  set -a
+  # shellcheck disable=SC1091
+  source "$GUAC_BASE/.env"
+  set +a
   docker exec -i -e PGPASSWORD="$POSTGRES_PASSWORD" guac-postgres psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1
 }
 

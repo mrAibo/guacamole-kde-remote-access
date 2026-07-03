@@ -68,6 +68,7 @@ else
 fi
 # shellcheck disable=SC1090
 source "$SECRET_FILE"
+KRDP_USER="${KRDP_USER:-$RDP_USER}"
 
 CERT_DIR="$SECRET_DIR/certs"
 CERT="$CERT_DIR/krdp.crt"
@@ -165,6 +166,7 @@ if [[ ! -f "$BASE/.env" ]]; then
   exit 1
 fi
 set -a
+# shellcheck disable=SC1091
 source "$BASE/.env"
 set +a
 
