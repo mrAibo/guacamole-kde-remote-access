@@ -1,0 +1,12 @@
+.env
+*.bak.*
+*.log
+backups/
+*.key
+*.pem
+id_*
+guacamole_rsa
+rdp.env
+.DS_Store
+.idea/
+.vscode/
