@@ -31,11 +31,25 @@ This setup was consolidated after debugging several real failure modes:
 
 ## Quick start
 
+### Arch / CachyOS / KDE Plasma Wayland
+
 ```bash
 git clone https://github.com/mrAibo/guacamole-kde-remote-access.git
 cd guacamole-kde-remote-access
 sudo bash scripts/install-all.sh
 ```
+
+### Portable / cross-distro path
+
+For Debian/Ubuntu/Fedora/openSUSE or non-KDE systems, start with the portable installer:
+
+```bash
+git clone https://github.com/mrAibo/guacamole-kde-remote-access.git
+cd guacamole-kde-remote-access
+sudo APP_USER=$USER ENABLE_KRDP=0 bash scripts/install-cross-distro.sh
+```
+
+This sets up the Guacamole Docker stack and browser SSH. Desktop sharing is distro/desktop-specific; see [`docs/distro-support.md`](docs/distro-support.md).
 
 Open Guacamole locally:
 
@@ -80,7 +94,8 @@ tailscale funnel status
 | Script | Purpose |
 |---|---|
 | `scripts/install-all.sh` | Runs the full setup in order |
-| `scripts/01-setup-guacamole.sh` | Guacamole/Postgres/guacd Docker stack, localhost-only HTTP, backup script |
+| `scripts/install-cross-distro.sh` | Portable Guacamole + SSH installer for Arch/Debian/Ubuntu/Fedora/openSUSE families |
+| `scripts/01-setup-guacamole.sh` | Guacamole/Postgres/guacd Docker Stack |
 | `scripts/02-setup-guacamole-ssh-compat.sh` | Docker-gateway-only compatibility SSHD and Guacamole SSH connection |
 | `scripts/03-fix-guacamole-bridge-firewall.sh` | Narrow firewall allow rule for Guacamole Docker bridge to SSHD |
 | `scripts/04-setup-krdp-3390.sh` | KRdp user service, RDP firewall rule, Guacamole RDP connection |
@@ -118,6 +133,12 @@ ls -lh /opt/guacamole/backups
 ## Troubleshooting
 
 See [`docs/troubleshooting.md`](docs/troubleshooting.md).
+
+Additional docs:
+
+- [`docs/distro-support.md`](docs/distro-support.md) — distro matrix and desktop alternatives
+- [`docs/architecture.md`](docs/architecture.md) — network/security architecture
+- [`SECURITY.md`](SECURITY.md) — hardening checklist and vulnerability guidance
 
 ## License
 
