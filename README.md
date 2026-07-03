@@ -70,6 +70,15 @@ Immediately:
 3. Enroll TOTP.
 4. Test backup.
 5. Test `Host SSH` and `Hermes Desktop` / `KDE Desktop`.
+6. If the RDP keyboard layout is wrong, set the server-side RDP layout:
+
+   ```bash
+   sudo bash scripts/05-set-rdp-keyboard-layout.sh de-de-qwertz
+   # or, for Swiss German keyboards:
+   sudo bash scripts/05-set-rdp-keyboard-layout.sh de-ch-qwertz
+   ```
+
+   Then disconnect the Guacamole RDP session, reload the browser page, and reconnect.
 
 ## Optional Tailscale Serve
 
@@ -99,6 +108,7 @@ tailscale funnel status
 | `scripts/02-setup-guacamole-ssh-compat.sh` | Docker-gateway-only compatibility SSHD and Guacamole SSH connection |
 | `scripts/03-fix-guacamole-bridge-firewall.sh` | Narrow firewall allow rule for Guacamole Docker bridge to SSHD |
 | `scripts/04-setup-krdp-3390.sh` | KRdp user service, RDP firewall rule, Guacamole RDP connection |
+| `scripts/05-set-rdp-keyboard-layout.sh` | Set persistent Guacamole RDP keyboard layout (`de-de-qwertz`, `de-ch-qwertz`, `failsafe`) |
 | `scripts/diagnose-guacamole-ssh.sh` | Deep SSH/Guacamole diagnostics with secrets redacted |
 
 ## Main paths/services

@@ -39,6 +39,44 @@ Desktop -> browser -> Guacamole -> Desktop -> browser -> ...
 
 This is expected. Test from another device, or minimize/move the local browser window.
 
+## RDP keyboard layout is English / wrong
+
+Symptom examples:
+
+```text
+z/y swapped
+ä/ö/ü missing or wrong
+@, €, \\, |, { }, [ ] broken
+```
+
+Reason: Guacamole's RDP layer needs the server-side keyboard layout. If `server-layout` is missing, guacd defaults to US English QWERTY even if KDE itself is German.
+
+Set a persistent layout in the Guacamole database and restart Guacamole services:
+
+```bash
+# German / Germany
+sudo bash scripts/05-set-rdp-keyboard-layout.sh de-de-qwertz
+
+# German / Switzerland
+sudo bash scripts/05-set-rdp-keyboard-layout.sh de-ch-qwertz
+
+# Last-resort Unicode input mode if AltGr/special keys still fail
+sudo bash scripts/05-set-rdp-keyboard-layout.sh failsafe
+```
+
+After running the script, fully disconnect the active RDP session, reload the browser page, and reconnect.
+
+Supported known values include:
+
+```text
+de-de-qwertz
+de-ch-qwertz
+fr-ch-qwertz
+failsafe
+```
+
+`server-layout` is the RDP server layout, not the browser/client layout.
+
 ## KRdp permission prompt
 
 KRdp may need a KDE/portal permission prompt on first start. Confirm it locally.

@@ -409,7 +409,7 @@ BEGIN
  SELECT connection_id INTO cid FROM guacamole_connection WHERE connection_name='KDE Desktop';
  IF cid IS NULL THEN INSERT INTO guacamole_connection (connection_name, protocol) VALUES ('KDE Desktop','rdp') RETURNING connection_id INTO cid; ELSE UPDATE guacamole_connection SET protocol='rdp' WHERE connection_id=cid; DELETE FROM guacamole_connection_parameter WHERE connection_id=cid; END IF;
  INSERT INTO guacamole_connection_parameter VALUES
-  (cid,'hostname','$gw'),(cid,'port','$KRDP_PORT'),(cid,'username','$KRDP_USER'),(cid,'password','$KRDP_PASSWORD'),(cid,'security','any'),(cid,'ignore-cert','true'),(cid,'resize-method','display-update'),(cid,'color-depth','24');
+  (cid,'hostname','$gw'),(cid,'port','$KRDP_PORT'),(cid,'username','$KRDP_USER'),(cid,'password','$KRDP_PASSWORD'),(cid,'security','any'),(cid,'ignore-cert','true'),(cid,'server-layout','${RDP_SERVER_LAYOUT:-de-de-qwertz}'),(cid,'resize-method','display-update'),(cid,'color-depth','24');
 END \$\$;
 SQL
   fi

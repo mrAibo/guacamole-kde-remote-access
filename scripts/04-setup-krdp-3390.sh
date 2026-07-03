@@ -193,6 +193,7 @@ BEGIN
     (cid, 'password', '$KRDP_PASSWORD'),
     (cid, 'security', 'any'),
     (cid, 'ignore-cert', 'true'),
+    (cid, 'server-layout', '${RDP_SERVER_LAYOUT:-de-de-qwertz}'),
     (cid, 'enable-wallpaper', 'true'),
     (cid, 'resize-method', 'display-update'),
     (cid, 'color-depth', '24');
