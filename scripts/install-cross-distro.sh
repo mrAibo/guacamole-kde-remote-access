@@ -400,7 +400,7 @@ BEGIN
 END \$\$;
 SQL
   if [[ -f "$APP_HOME/.config/guacamole-krdp/rdp.env" ]] && has krdpserver; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1091
     source "$APP_HOME/.config/guacamole-krdp/rdp.env"
     psql_exec <<SQL
 DO \$\$
